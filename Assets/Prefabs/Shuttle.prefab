@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1502370835}
   - component: {fileID: 1502370830}
   - component: {fileID: 1502370836}
+  - component: {fileID: 143022833}
   m_Layer: 0
   m_Name: Shuttle
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 8538418798736411316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -21, y: 3.7195072, z: 6.7195473}
-  m_LocalScale: {x: 0.5, y: 2, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -128,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainThrust: 1000
   rotationThrust: 100
+  mainEngine: {fileID: 8300000, guid: 40bfc946d46abaf43abe333d31bc5ba5, type: 3}
 --- !u!82 &1502370836
 AudioSource:
   m_ObjectHideFlags: 0
@@ -138,7 +140,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 40bfc946d46abaf43abe333d31bc5ba5, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -224,3 +226,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &143022833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538418798736411316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e3ec212c23db504f84e1f341b089887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelDelay: 1
+  crash: {fileID: 8300000, guid: 977e9cf3e0c1191478dfe367da1c7c85, type: 3}
+  success: {fileID: 8300000, guid: 559b2190d34d37b4f956a347a633454d, type: 3}
