@@ -9,9 +9,13 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] float levelDelay = 1f;
     [SerializeField] AudioClip crash;
     [SerializeField] AudioClip success;
+
+    [SerializeField] ParticleSystem crashParticles;
+    [SerializeField] ParticleSystem successParticles;
     AudioSource audioSource;
 
     bool isTransitioning = false;
+    bool stopCollisions = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,12 +25,24 @@ public class CollisionHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        RespondToDebugKeys();
+    }
+
+    private void RespondToDebugKeys()
+    {
+        if (Input.GetKey(KeyCode.C))
+        {
+            stopCollisions = !stopCollisions; // Will toggle colissions
+        }
+        else if (Input.GetKey(KeyCode.L))
+        {
+            LoadNextLevel();
+        }
     }
 
     private void OnCollisionEnter(Collision other) 
     {
-        if(isTransitioning){return;}
+        if(isTransitioning || stopCollisions){return;}
         
         switch(other.gameObject.tag)
         {
@@ -48,7 +64,7 @@ public class CollisionHandler : MonoBehaviour
         audioSource.Stop();
         // todo add SFX upon crash
         audioSource.PlayOneShot(crash);
-        // todo add particle effect upon crash
+        crashParticles.Play();
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadLevel", levelDelay);
     }
@@ -59,7 +75,7 @@ public class CollisionHandler : MonoBehaviour
         // todo add SFX upon crash
         audioSource.Stop();
         audioSource.PlayOneShot(success);
-        // todo add particle effect upon victory
+        successParticles.Play();
         GetComponent<Movement>().enabled = false;
         Invoke("LoadNextLevel", levelDelay);
     }
@@ -74,7 +90,6 @@ public class CollisionHandler : MonoBehaviour
         }
         SceneManager.LoadScene(nextSceneIndex);
     }
-
     private void ReloadLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
